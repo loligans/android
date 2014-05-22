@@ -83,6 +83,7 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 	@Override
 	public void run() {
 		mThreadRunning = true;
+		mMaximumSquares = 50;
 		Log.v("Thread", "Launching Thread");
 		while(mThreadRunning){
 			regenerateMatrix();
@@ -136,5 +137,9 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 			Log.v("Sleeping Game Replay", "" + duration + "ms");
 			e.printStackTrace();
 		}
+	}
+	
+	public void setThreadStatus(boolean newStatus){
+		mThreadRunning = newStatus;
 	}
 }

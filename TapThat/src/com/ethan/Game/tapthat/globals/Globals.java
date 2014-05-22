@@ -9,9 +9,23 @@ public class Globals extends Application{
 	private Bitmap[] mDefaultGameImages = null;
 	private Bitmap[] mImportedBackgroundImages = null;
 	private Bitmap[] mImportedTileImages = null;
+	/**
+	 * 0-5 contain the highScores
+	 */
 	private SharedPreferences mUserHighScoreData = null;
+	/**
+	 * User preferences stored here
+	 * 0 = Stores the Currently Set Background Image
+	 * 1 = Stored the Currently Set Tile Image
+	 */
 	private SharedPreferences mUserPrefData = null;
+	/**
+	 * Imported Background image Locations are stored here
+	 */
 	private SharedPreferences mUserBackgroundImageImportsData = null;
+	/**
+	 * Imported Tile Image Locations are stored here
+	 */
 	private SharedPreferences mUserTileImageImportsData = null;
 	
 	public Bitmap[] getDefaultGameImages() {

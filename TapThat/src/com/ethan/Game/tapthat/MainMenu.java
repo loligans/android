@@ -20,39 +20,17 @@ import android.widget.Button;
 public class MainMenu extends Activity{
 	private GameReplay replay;
 	private OptionsMenu opts;
-	private Bitmap[] mDefaultGameImages;
-	private Bitmap[] mImportedBackgroundImages;
-	private Bitmap[] mImportedTileImages;
-	/**
-	 * 0-5 contain the highScores
-	 */
-	private SharedPreferences mUserHighScoreData;
-	/**
-	 * User preferences stored here
-	 * 0 = Stores the Currently Set Background Image
-	 * 1 = Stored the Currently Set Tile Image
-	 */
-	private SharedPreferences mUserPrefData;
-	/**
-	 * Imported Background image Locations are stored here
-	 */
-	private SharedPreferences mUserBackgroundImageImportsData;
-	/**
-	 * Imported Tile Image Locations are stored here
-	 */
-	private SharedPreferences mUserTileImageImportsData;
-	
+	private Globals globalVar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		final Globals globalVar = (Globals) getApplicationContext();
-		mDefaultGameImages = globalVar.getDefaultGameImages();
-		mImportedBackgroundImages = globalVar.getImportedBackgroundImages();
-		mImportedTileImages = globalVar.getImportedTileImages();
-		mUserHighScoreData = globalVar.getUserHighScoreData();
-		mUserBackgroundImageImportsData = globalVar.getUserBackgroundImageImportsData();
-		mUserTileImageImportsData = globalVar.getUserTileImageImportsData();
+		globalVar = (Globals)getApplicationContext();
 		initGame();
 		super.onCreate(savedInstanceState);
+	}
+	@Override
+	protected void onResume() {
+		new Thread(replay).start();
+		super.onResume();
 	}
 	protected void initGame(){
 		View main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
@@ -60,11 +38,10 @@ public class MainMenu extends Activity{
 		setupGameReplayView();
 		opts = new OptionsMenu(getApplicationContext());
 		setupButtons();
-		new Thread(replay).start();
 	}
 	private void setupGameReplayView(){
 		replay = (GameReplay) findViewById(R.id.surfaceView1);
-		replay.initGameReplay(Long.parseLong(mUserHighScoreData.getString("0", "9000")));
+		replay.initGameReplay(Long.parseLong(globalVar.getUserHighScoreData().getString("0", "9000")));
 	}
 	/**
 	 * Finds the users previous tile and background image
@@ -77,22 +54,22 @@ public class MainMenu extends Activity{
 		switch (switchCase) {
 		//case background
 		case 1:
-			int userBackground = Integer.parseInt(mUserPrefData.getString("0", "1"));
+			int userBackground = Integer.parseInt(globalVar.getUserPrefData().getString("0", "1"));
 			if(userBackground < 2){
 				//Default Background Selected
-				returnedImage = mDefaultGameImages[userBackground];
+				GameReplay.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
 			}else{
-				returnedImage = mImportedBackgroundImages[userBackground-2];
+				GameReplay.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
 			}
 			break;
 		//case tile
 		case 2:
-			int userTile = Integer.parseInt(mUserPrefData.getString("1", "1"));
+			int userTile = Integer.parseInt(globalVar.getUserPrefData().getString("1", "1"));
 			if(userTile < 2){
 				//Default Tile Selected
-				returnedImage = mDefaultGameImages[2+userTile];
+				GameReplay.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
 			}else{
-				returnedImage = mImportedTileImages[userTile-2];
+				GameReplay.mTileImage = globalVar.getImportedTileImages()[userTile-2];
 			}
 			break;
 		}
@@ -149,6 +126,16 @@ public class MainMenu extends Activity{
 		Log.v("MainMenu", "Options Menu Button");
 		AppEntrance.viewableUI = 2;
 		setContentView(R.layout.options_menu);
+	}
+	@Override
+	protected void onPause() {
+		replay.setThreadStatus(false);
+		super.onPause();
+	}
+	@Override
+	protected void onDestroy() {
+		
+		super.onDestroy();
 	}
 	
 }

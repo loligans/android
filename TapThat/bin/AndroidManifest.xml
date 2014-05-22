@@ -19,14 +19,21 @@
            android:value="@integer/google_play_services_version" />
         <activity
             android:name="com.ethan.Game.tapthat.AppEntrance"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" ></activity>
+        <activity 
+            android:name=".MainMenu" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

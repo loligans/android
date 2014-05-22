@@ -99,7 +99,6 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 		globalVar.setImportedTileImages(result[2]);
 		selectDefaultImages(1);selectDefaultImages(2);
 		Intent mainGame = new Intent(mAppContext.get(), MainMenu.class);
-		mainGame.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mActivity.startActivity(mainGame);
 	}
 	
