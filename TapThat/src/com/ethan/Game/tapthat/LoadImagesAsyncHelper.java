@@ -16,6 +16,7 @@ import android.util.Log;
 
 public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 	private WeakReference<Context> mAppContext;
+	private AppEntrance mActivity;
 	private String[] backgroundsImages;
 	private String[] tileImages;
 	public LoadImagesAsyncHelper(Context appContext, AppEntrance appActivity, SharedPreferences highScoreData,
@@ -23,10 +24,12 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 			String[] imageBackgroundsToLoadFromFile, String[] imageTilesToLoadFromFile)
 	{
 		mAppContext = new WeakReference<Context>(appContext);
-		Globals.mUserHighScoreData = highScoreData;
-		Globals.mUserPrefData = userPrefData;
-		Globals.mUserBackgroundImageImportsData = userBackgroundImageImportsData;
-		Globals.mUserTileImageImportsData = userTileImageImportsData;
+		mActivity = appActivity;
+		final Globals globalVar = (Globals) mActivity.getApplicationContext();
+		globalVar.setUserHighScoreData(highScoreData);
+		globalVar.setUserPrefData(userPrefData);
+		globalVar.setUserBackgroundImageImportsData(userBackgroundImageImportsData);
+		globalVar.setUserTileImageImportsData(userTileImageImportsData);
 		backgroundsImages = imageBackgroundsToLoadFromFile;
 		tileImages = imageTilesToLoadFromFile;
 	}
@@ -90,12 +93,40 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 	@Override
 	protected void onPostExecute(Bitmap[][] result) {
 		super.onPostExecute(result);
-		Globals.mDefaultGameImages = result[0];
-		Globals.mImportedBackgroundImages = result[1]; 
-		Globals.mImportedTileImages = result[2];
+		final Globals globalVar = (Globals) mActivity.getApplicationContext();
+		globalVar.setDefaultGameImages(result[0]);
+		globalVar.setImportedBackgroundImages(result[1]); 
+		globalVar.setImportedTileImages(result[2]);
+		selectDefaultImages(1);selectDefaultImages(2);
 		Intent mainGame = new Intent(mAppContext.get(), MainMenu.class);
 		mainGame.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		mAppContext.get().startActivity(mainGame);
+		mActivity.startActivity(mainGame);
+	}
+	
+	private void selectDefaultImages(int switchCase){
+		final Globals globalVar = (Globals)mActivity.getApplicationContext();
+		switch (switchCase) {
+		//case background
+		case 1:
+			int userBackground = Integer.parseInt(globalVar.getUserPrefData().getString("0", "1"));
+			if(userBackground < 2){
+				//Default Background Selected
+				GameReplay.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
+			}else{
+				GameReplay.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
+			}
+			break;
+		//case tile
+		case 2:
+			int userTile = Integer.parseInt(globalVar.getUserPrefData().getString("1", "1"));
+			if(userTile < 2){
+				//Default Tile Selected
+				GameReplay.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
+			}else{
+				GameReplay.mTileImage = globalVar.getImportedTileImages()[userTile-2];
+			}
+			break;
+		}
 	}
 	
 }

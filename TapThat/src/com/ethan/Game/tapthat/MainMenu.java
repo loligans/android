@@ -44,28 +44,27 @@ public class MainMenu extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		mDefaultGameImages = Globals.mDefaultGameImages;
-		mImportedBackgroundImages = Globals.mImportedBackgroundImages;
-		mImportedTileImages = Globals.mImportedTileImages;
-		mUserHighScoreData = Globals.mUserHighScoreData;
-		mUserBackgroundImageImportsData = Globals.mUserBackgroundImageImportsData;
-		mUserTileImageImportsData = Globals.mUserTileImageImportsData;
+		final Globals globalVar = (Globals) getApplicationContext();
+		mDefaultGameImages = globalVar.getDefaultGameImages();
+		mImportedBackgroundImages = globalVar.getImportedBackgroundImages();
+		mImportedTileImages = globalVar.getImportedTileImages();
+		mUserHighScoreData = globalVar.getUserHighScoreData();
+		mUserBackgroundImageImportsData = globalVar.getUserBackgroundImageImportsData();
+		mUserTileImageImportsData = globalVar.getUserTileImageImportsData();
 		initGame();
 		super.onCreate(savedInstanceState);
 	}
 	protected void initGame(){
 		View main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
 		setContentView(main_Menu);
-//		setupGameReplayView();
-//		opts = new OptionsMenu(getApplicationContext());
-//		setupButtons();
-//		new Thread(replay).start();
+		setupGameReplayView();
+		opts = new OptionsMenu(getApplicationContext());
+		setupButtons();
+		new Thread(replay).start();
 	}
 	private void setupGameReplayView(){
 		replay = (GameReplay) findViewById(R.id.surfaceView1);
-		Bitmap defBackgroundImage = selectDefaultImages(1);
-		Bitmap defTileImage = selectDefaultImages(2);
-		replay.initGameReplay(defBackgroundImage, defTileImage, Long.parseLong(mUserHighScoreData.getString("0", "9000")));
+		replay.initGameReplay(Long.parseLong(mUserHighScoreData.getString("0", "9000")));
 	}
 	/**
 	 * Finds the users previous tile and background image

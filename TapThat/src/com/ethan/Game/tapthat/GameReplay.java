@@ -13,8 +13,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.Callback{
-	private static Bitmap		 mTileImage = null;
-	private static Bitmap 		 mBackgroundImage = null;
+	public static Bitmap		 mTileImage = null;
+	public static Bitmap 		 mBackgroundImage = null;
 	private static Paint   		 mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private static SurfaceHolder mSurfaceHolder;
 	private static Random		 mRandom = new Random();
@@ -31,13 +31,9 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 	
 	/**
 	 * Passes in the Tile Images to be used
-	 * @param tileImage
-	 * @param background
 	 * @param highScore 
 	 */
-	public void initGameReplay(Bitmap background, Bitmap tileImage, long highScore){
-		mTileImage = tileImage;
-		mBackgroundImage = background;
+	public void initGameReplay(long highScore){
 		mHighScore = highScore/50;
 	}
 	private void loadMatrix(){
