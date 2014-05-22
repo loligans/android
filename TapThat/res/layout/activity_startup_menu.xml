@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context="com.E.Games.shark.StartupMenu"
+    tools:ignore="MergeRootFrame" >
+
+    <com.ethan.Game.tapthat.GameReplay
+        android:id="@+id/surfaceView1"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/RelativeLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/menu_highscores_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/imageView1"
+            android:text="@string/top_scores" />
+
+        <Button
+            android:id="@+id/menu_start_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/menu_highscores_button"
+            android:layout_below="@+id/menu_start_tap_out"
+            android:text="@string/options_button" />
+
+        <Button
+            android:id="@+id/menu_start_time_crunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/menu_start_tap_out"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="@string/start_time_crunch" />
+
+        <Button
+            android:id="@+id/menu_start_tap_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/menu_start_time_crunch"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/start_tap_out" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:contentDescription="@string/splash_screen_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/menu_start_time_crunch"
+            android:layout_centerHorizontal="true"
+            android:src="@android:drawable/divider_horizontal_dim_dark" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
