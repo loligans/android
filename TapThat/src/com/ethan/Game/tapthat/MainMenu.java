@@ -21,6 +21,7 @@ public class MainMenu extends Activity{
 	private GameReplay replay;
 	private OptionsMenu opts;
 	private Globals globalVar;
+	private View main_Menu;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		globalVar = (Globals)getApplicationContext();
@@ -33,7 +34,7 @@ public class MainMenu extends Activity{
 		super.onResume();
 	}
 	protected void initGame(){
-		View main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
+		main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
 		setContentView(main_Menu);
 		setupGameReplayView();
 		opts = new OptionsMenu(getApplicationContext());
@@ -115,17 +116,52 @@ public class MainMenu extends Activity{
 	//The methods that will be called when a button is pressed
 	private void startTapOut(){
 		Log.v("MainMenu", "Tap Out Button");
+		replay.setThreadStatus(false);
+		currentView = 3;
+		
 	}
 	private void startTimeCrunch(){
 		Log.v("MainMenu", "Time Crunch Button");
 	}
 	private void loadHighScores(){
 		Log.v("MainMenu", "High Scores Button");
+		replay.setThreadStatus(false);
+		setContentView(R.layout.best_times);
+		currentView = 1;
 	}
 	private void loadOptionsMenu(){
 		Log.v("MainMenu", "Options Menu Button");
-		AppEntrance.viewableUI = 2;
+		replay.setThreadStatus(false);
+		currentView = 2;
 		setContentView(R.layout.options_menu);
+	}
+	/**
+	 * 0 = main menu
+	 * 1 = high scores menu
+	 * 2 = options menu
+	 * 3 = in game
+	 */
+	private int currentView = 0;
+	@Override
+	public void onBackPressed() {
+		Log.d("MainMenu", "Back Pressed");
+		switch(currentView){
+			case 0:
+				super.onBackPressed();
+				break;
+			case 1:
+				setContentView(main_Menu);
+				onResume();
+				currentView = 0;
+				break;
+			case 2:
+				setContentView(main_Menu);
+				onResume();
+				currentView = 0;
+				break;
+			case 3:
+				Log.i("In Game", "Preventing back press");
+		}
 	}
 	@Override
 	protected void onPause() {

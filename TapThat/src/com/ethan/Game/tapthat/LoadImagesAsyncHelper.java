@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
+import com.ethan.Game.tapthat.gameactivity.Game;
 import com.ethan.Game.tapthat.globals.Globals;
 
 import android.content.Context;
@@ -111,8 +112,10 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 			if(userBackground < 2){
 				//Default Background Selected
 				GameReplay.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
+				Game.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
 			}else{
 				GameReplay.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
+				Game.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
 			}
 			break;
 		//case tile
@@ -121,8 +124,10 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 			if(userTile < 2){
 				//Default Tile Selected
 				GameReplay.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
+				Game.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
 			}else{
 				GameReplay.mTileImage = globalVar.getImportedTileImages()[userTile-2];
+				Game.mTileImage = globalVar.getImportedTileImages()[userTile-2];
 			}
 			break;
 		}

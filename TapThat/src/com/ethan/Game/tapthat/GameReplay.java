@@ -75,6 +75,7 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 			mScaledReplayY = h/4;
 			Log.v("GameReplay", "Surface Area has changed X = " + w + " | Y = " + h);
 			if(mScaledAlready == false){
+				//TODO Change scaled already if new image is selected
 				mTileImage = Bitmap.createScaledBitmap(mTileImage, w/4, h/4, false);
 				mBackgroundImage = Bitmap.createScaledBitmap(mBackgroundImage, w, h, false);
 			}
