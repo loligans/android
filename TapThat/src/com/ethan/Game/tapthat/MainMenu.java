@@ -2,10 +2,12 @@ package com.ethan.Game.tapthat;
 
 import java.util.logging.Logger;
 
+import com.ethan.Game.tapthat.gameactivity.Game;
 import com.ethan.Game.tapthat.globals.Globals;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -117,11 +119,16 @@ public class MainMenu extends Activity{
 	private void startTapOut(){
 		Log.v("MainMenu", "Tap Out Button");
 		replay.setThreadStatus(false);
-		currentView = 3;
-		
+		Intent tapOut = new Intent(getApplicationContext(), Game.class);
+		tapOut.putExtra("game_mode", 1);
+		startActivityForResult(tapOut, 1);
 	}
 	private void startTimeCrunch(){
 		Log.v("MainMenu", "Time Crunch Button");
+		replay.setThreadStatus(false);
+		Intent tapOut = new Intent(getApplicationContext(), Game.class);
+		tapOut.putExtra("game_mode", 2);
+		startActivityForResult(tapOut, 2);
 	}
 	private void loadHighScores(){
 		Log.v("MainMenu", "High Scores Button");
@@ -172,6 +179,16 @@ public class MainMenu extends Activity{
 	protected void onDestroy() {
 		
 		super.onDestroy();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+			int score = data.getIntExtra("score", 0);
+			Log.d("Activity Finished", "Score = " + score);
+		}
+		Log.d("RE code", ""+requestCode);
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
 }
