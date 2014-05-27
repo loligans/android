@@ -15,63 +15,63 @@
         android:textSize="48sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tapout_highscore1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/current_time"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="@string/best_time_1"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tapout_highscore2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/tapout_highscore1"
         android:layout_centerHorizontal="true"
-        android:text="@string/best_time_2"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tapout_highscore3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/tapout_highscore2"
         android:layout_centerHorizontal="true"
-        android:text="@string/best_time_3"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tapout_highscore4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/tapout_highscore3"
         android:layout_centerHorizontal="true"
-        android:text="@string/best_time_4"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tapout_highscore5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/tapout_highscore4"
         android:layout_centerHorizontal="true"
-        android:text="@string/best_time_5"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tapout_highscore6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/tapout_highscore5"
         android:layout_centerHorizontal="true"
-        android:text="@string/best_time_6"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
@@ -81,7 +81,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/tapout_highscore6"
         android:text="@string/retry_button" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/game_type"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

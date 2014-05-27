@@ -25,24 +25,35 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int ListView1=0x7f080011;
+        public static final int ListView1=0x7f08001c;
         public static final int RelativeLayout1=0x7f080005;
         public static final int current_time=0x7f08000a;
         public static final int frame_layout=0x7f080003;
-        public static final int imageView1=0x7f080000;
+        public static final int highscore_menu_launch_tapout=0x7f080013;
+        public static final int highscore_menu_launch_timecrunch=0x7f080012;
         public static final int menu_highscores_button=0x7f080006;
         public static final int menu_start_options=0x7f080007;
         public static final int menu_start_tap_out=0x7f080008;
         public static final int menu_start_time_crunch=0x7f080009;
         public static final int progressBar1=0x7f080001;
         public static final int retry_button=0x7f080010;
+        public static final int space=0x7f080000;
         public static final int surfaceView1=0x7f080004;
-        public static final int textView1=0x7f080002;
-        public static final int textView2=0x7f08000b;
-        public static final int textView3=0x7f08000c;
-        public static final int textView4=0x7f08000d;
-        public static final int textView5=0x7f08000e;
-        public static final int textView6=0x7f08000f;
+        public static final int tapout_highscore1=0x7f080002;
+        public static final int tapout_highscore2=0x7f08000b;
+        public static final int tapout_highscore3=0x7f08000c;
+        public static final int tapout_highscore4=0x7f08000d;
+        public static final int tapout_highscore5=0x7f08000e;
+        public static final int tapout_highscore6=0x7f08000f;
+        public static final int textView1=0x7f080011;
+        public static final int textView7=0x7f080016;
+        public static final int textView8=0x7f080014;
+        public static final int timecrunch_highscore1=0x7f080017;
+        public static final int timecrunch_highscore2=0x7f080018;
+        public static final int timecrunch_highscore3=0x7f080019;
+        public static final int timecrunch_highscore4=0x7f08001a;
+        public static final int timecrunch_highscore5=0x7f08001b;
+        public static final int timecrunch_highscore6=0x7f080015;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -51,7 +62,8 @@ public final class R {
         public static final int activity_splashscreen=0x7f030000;
         public static final int activity_startup_menu=0x7f030001;
         public static final int best_times=0x7f030002;
-        public static final int options_menu=0x7f030003;
+        public static final int highscores_layout=0x7f030003;
+        public static final int options_menu=0x7f030004;
     }
     public static final class raw {
         public static final int lava_background=0x7f040000;
@@ -63,20 +75,16 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
-        public static final int best_time_1=0x7f060004;
-        public static final int best_time_2=0x7f060005;
-        public static final int best_time_3=0x7f060006;
-        public static final int best_time_4=0x7f060007;
-        public static final int best_time_5=0x7f060008;
-        public static final int best_time_6=0x7f060009;
         public static final int current_time=0x7f060003;
-        public static final int menu_option=0x7f06000d;
-        public static final int options_button=0x7f06000c;
-        public static final int retry_button=0x7f06000a;
-        public static final int splash_screen=0x7f06000e;
-        public static final int splash_screen_description=0x7f06000f;
+        public static final int default_time=0x7f060004;
+        public static final int game_type=0x7f06000c;
+        public static final int menu_option=0x7f060008;
+        public static final int options_button=0x7f060007;
+        public static final int retry_button=0x7f060005;
+        public static final int splash_screen=0x7f060009;
+        public static final int splash_screen_description=0x7f06000a;
         public static final int start_tap_out=0x7f060001;
-        public static final int start_time_crunch=0x7f060010;
-        public static final int top_scores=0x7f06000b;
+        public static final int start_time_crunch=0x7f06000b;
+        public static final int top_scores=0x7f060006;
     }
 }

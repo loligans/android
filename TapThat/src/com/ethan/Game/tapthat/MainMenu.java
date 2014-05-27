@@ -1,22 +1,15 @@
 package com.ethan.Game.tapthat;
 
-import java.util.logging.Logger;
-
 import com.ethan.Game.tapthat.gameactivity.Game;
 import com.ethan.Game.tapthat.globals.Globals;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
 
 public class MainMenu extends Activity{
@@ -24,6 +17,8 @@ public class MainMenu extends Activity{
 	private OptionsMenu opts;
 	private Globals globalVar;
 	private View main_Menu;
+	private View main_Highscores;
+	private View main_Options;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		globalVar = (Globals)getApplicationContext();
@@ -37,6 +32,8 @@ public class MainMenu extends Activity{
 	}
 	protected void initGame(){
 		main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
+		main_Highscores = getLayoutInflater().inflate(R.layout.highscores_layout, null);
+		main_Options = getLayoutInflater().inflate(R.layout.options_menu, null);
 		setContentView(main_Menu);
 		setupGameReplayView();
 		opts = new OptionsMenu(getApplicationContext());
@@ -133,14 +130,28 @@ public class MainMenu extends Activity{
 	private void loadHighScores(){
 		Log.v("MainMenu", "High Scores Button");
 		replay.setThreadStatus(false);
-		setContentView(R.layout.best_times);
+		setContentView(main_Highscores);
+		Button tap_out_Button = (Button)findViewById(R.id.highscore_menu_launch_tapout);
+		Button time_crunch_Button = (Button)findViewById(R.id.highscore_menu_launch_timecrunch);
+		tap_out_Button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.i("High Score Menu", "Tap Out Is Starting");
+			}
+		});
+		time_crunch_Button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.i("High Score Menu", "Time Crunch Is Starting");
+			}
+		});
 		currentView = 1;
 	}
 	private void loadOptionsMenu(){
 		Log.v("MainMenu", "Options Menu Button");
 		replay.setThreadStatus(false);
 		currentView = 2;
-		setContentView(R.layout.options_menu);
+		setContentView(main_Options);
 	}
 	/**
 	 * 0 = main menu
@@ -186,8 +197,27 @@ public class MainMenu extends Activity{
 		if(requestCode == 1 && resultCode == Activity.RESULT_OK){
 			int score = data.getIntExtra("score", 0);
 			Log.d("Activity Finished", "Score = " + score);
+		}else if(requestCode == 1 && resultCode == Activity.RESULT_CANCELED){
+			//They lost or left
 		}
-		Log.d("RE code", ""+requestCode);
+		switch(requestCode){
+		case 1:
+			if(resultCode == Activity.RESULT_OK){
+				int score = data.getIntExtra("score", 0);
+				
+			}else{
+				//Game Stopped some how
+			}
+			break;
+		case 2:
+			if(resultCode == Activity.RESULT_OK){
+				int score = data.getIntExtra("score", 0);
+				
+			}else{
+				//Game Stopped some how
+			}
+			break;
+		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/highscore_menu_launch_timecrunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/highscore_menu_launch_tapout"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore6"
+        android:text="@string/start_time_crunch" />
+
+    <Button
+        android:id="@+id/highscore_menu_launch_tapout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tapout_highscore6"
+        android:layout_toLeftOf="@+id/space"
+        android:text="@string/start_tap_out" />
+
+    <ImageView
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@android:drawable/alert_dark_frame"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/space"
+        android:gravity="center"
+        android:text="Time Crunch"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore1"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="Tap Out"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView8"
+        android:layout_toRightOf="@+id/space"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore1"
+        android:layout_toRightOf="@+id/space"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timecrunch_highscore2"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore2"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timecrunch_highscore3"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore3"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timecrunch_highscore4"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore4"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/timecrunch_highscore6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timecrunch_highscore5"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timecrunch_highscore5"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/timecrunch_highscore1"
+        android:layout_alignBottom="@+id/timecrunch_highscore1"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/space"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore1"
+        android:layout_below="@+id/tapout_highscore1"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore2"
+        android:layout_below="@+id/tapout_highscore2"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore3"
+        android:layout_below="@+id/tapout_highscore3"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore4"
+        android:layout_below="@+id/tapout_highscore4"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tapout_highscore6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tapout_highscore5"
+        android:layout_below="@+id/tapout_highscore5"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+</RelativeLayout>

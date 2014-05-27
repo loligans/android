@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/imageView1"
+            android:layout_toLeftOf="@+id/space"
             android:text="@string/top_scores" />
 
         <Button
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/menu_start_tap_out"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/space"
             android:text="@string/start_time_crunch" />
 
         <Button
@@ -62,7 +62,7 @@
             android:text="@string/start_tap_out" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/space"
             android:contentDescription="@string/splash_screen_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
