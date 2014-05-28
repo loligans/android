@@ -27,7 +27,9 @@ public class MainMenu extends Activity{
 	}
 	@Override
 	protected void onResume() {
-		new Thread(replay).start();
+		if(currentView == 0){
+			new Thread(replay).start();
+		} 
 		super.onResume();
 	}
 	protected void initGame(){
@@ -131,20 +133,8 @@ public class MainMenu extends Activity{
 		Log.v("MainMenu", "High Scores Button");
 		replay.setThreadStatus(false);
 		setContentView(main_Highscores);
-		Button tap_out_Button = (Button)findViewById(R.id.highscore_menu_launch_tapout);
-		Button time_crunch_Button = (Button)findViewById(R.id.highscore_menu_launch_timecrunch);
-		tap_out_Button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.i("High Score Menu", "Tap Out Is Starting");
-			}
-		});
-		time_crunch_Button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.i("High Score Menu", "Time Crunch Is Starting");
-			}
-		});
+		HighScoresMenu scores = new HighScoresMenu(MainMenu.this, globalVar);
+		scores.loadObjects();
 		currentView = 1;
 	}
 	private void loadOptionsMenu(){
@@ -169,13 +159,13 @@ public class MainMenu extends Activity{
 				break;
 			case 1:
 				setContentView(main_Menu);
-				onResume();
 				currentView = 0;
+				onResume();
 				break;
 			case 2:
 				setContentView(main_Menu);
-				onResume();
 				currentView = 0;
+				onResume();
 				break;
 			case 3:
 				Log.i("In Game", "Preventing back press");
@@ -194,12 +184,6 @@ public class MainMenu extends Activity{
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == 1 && resultCode == Activity.RESULT_OK){
-			int score = data.getIntExtra("score", 0);
-			Log.d("Activity Finished", "Score = " + score);
-		}else if(requestCode == 1 && resultCode == Activity.RESULT_CANCELED){
-			//They lost or left
-		}
 		switch(requestCode){
 		case 1:
 			if(resultCode == Activity.RESULT_OK){
