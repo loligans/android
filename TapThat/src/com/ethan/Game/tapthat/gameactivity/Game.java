@@ -9,18 +9,29 @@ import android.view.SurfaceHolder;
 public class Game extends Activity{
 	public static Bitmap		 mTileImage = null;
 	public static Bitmap 		 mBackgroundImage = null;
-	private SurfaceHolder 		 mSurfaceHolder;
-	private boolean				 mSurfaceCreated = false;
 	private int 				 mGameMode = 0;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		//getIntent().getIntExtra("game_mode", 1);
+		mGameMode = getIntent().getIntExtra("game_mode", 1);
+		Log.d("Received Intent", "Game Mode = " + mGameMode);
+		switch (mGameMode) {
+		case 1:
+			Log.d("Game", "Starting Tap Out");
+			setContentView(new TapOut(getApplicationContext()));
+			break;
+		}
 		super.onCreate(savedInstanceState);
 	}
 	@Override
+	protected void onResume() {
+		
+		super.onResume();
+	}
+	
+	@Override
 	protected void onPause() {
+		finishGameActivity(0);
 		super.onPause();
 	}
 	
@@ -28,13 +39,13 @@ public class Game extends Activity{
 	public void onBackPressed() 
 	{
 		Log.d("Debug", "OR here");
-		finishGameActivity();
+		finishGameActivity(0);
 		
 		return;
 	}
-	private void finishGameActivity(){
+	private void finishGameActivity(int score){
 		Intent data = new Intent();
-		data.putExtra("score", 9500);
+		data.putExtra("score", score);
 		if (getParent() == null) {
 		    setResult(Activity.RESULT_OK, data);
 		} else {

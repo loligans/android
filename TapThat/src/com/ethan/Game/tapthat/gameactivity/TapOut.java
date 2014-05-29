@@ -15,6 +15,7 @@ import android.view.GestureDetector.OnGestureListener;
 public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 	private boolean		   		mSurfaceCreated = false;
 	private boolean				mGameStarted = false;
+	private boolean 			mScaledImages = false;
 	private int			   		mDisplayX;
 	private int			   	    mDisplayY;
 	private int		  	   		mScaledX;
@@ -26,8 +27,8 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 	private SurfaceHolder   	mSurfaceHolder;
 	private GestureDetector 	mGestureDetector;
 	private Context 		   	mApplicationContext;
-	private Bitmap 		   		mRedSquareBitmap;
-	private Bitmap   			mImageBackground;
+	private Bitmap 		   		mTileBitmap;
+	private Bitmap   			mBackgroundBitmap;
 	private static Random 		mRandom;
 	
 	public TapOut(Context context){
@@ -41,6 +42,10 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
 		mSurfaceCreated = true;
+		for(int i=0;i<4;i++){
+			mImageMatrix[i] = mRandom.nextInt(4)+1;
+		}
+		updateView();
 	}
 
 	@Override
@@ -56,14 +61,23 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 		
 	}
 	
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		if(!mScaledImages){
+			mTileBitmap = Bitmap.createScaledBitmap(mTileBitmap, w/4, h/4, false);
+			mBackgroundBitmap = Bitmap.createScaledBitmap(mBackgroundBitmap, w/4, h/4, false);
+			mScaledImages = true;
+		}
+		super.onSizeChanged(w, h, oldw, oldh);
+	}
 	
 	private void updateView(){
 		if(mSurfaceCreated){
 			Canvas mCanvas = mSurfaceHolder.lockCanvas();
 			//Drawing code goes here
-			mCanvas.drawBitmap(mImageBackground, 0, 0, mPaint);
+			mCanvas.drawBitmap(mBackgroundBitmap, 0, 0, mPaint);
 			for(int x=0;x<4;x++){
-				mCanvas.drawBitmap(mRedSquareBitmap, mScaledX * (mImageMatrix[x] - 1), mScaledY*(3-x), mPaint);
+				mCanvas.drawBitmap(mTileBitmap, mScaledX * (mImageMatrix[x] - 1), mScaledY*(3-x), mPaint);
 			}
 			mSurfaceHolder.unlockCanvasAndPost(mCanvas);
 		}
