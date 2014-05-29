@@ -21,7 +21,6 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 	private static long			 mHighScore;
 	private static int 			 mScaledReplayX;
 	private static int 			 mScaledReplayY;
-	private static boolean 		 mScaledAlready;
 	private int[]           	 mImageMatrix = new int[4];
 	private int					 mMaximumSquares = 50;
 	private boolean		 		 mThreadRunning = false;
@@ -74,11 +73,9 @@ public class GameReplay extends SurfaceView implements Runnable, SurfaceHolder.C
 			mScaledReplayX = w/4;
 			mScaledReplayY = h/4;
 			Log.v("GameReplay", "Surface Area has changed X = " + w + " | Y = " + h);
-			if(mScaledAlready == false){
-				//TODO Change scaled already if new image is selected
-				mTileImage = Bitmap.createScaledBitmap(mTileImage, w/4, h/4, false);
-				mBackgroundImage = Bitmap.createScaledBitmap(mBackgroundImage, w, h, false);
-			}
+			//TODO Change scaled already if new image is selected
+			mTileImage = Bitmap.createScaledBitmap(mTileImage, w/4, h/4, false);
+			mBackgroundImage = Bitmap.createScaledBitmap(mBackgroundImage, w, h, false);
 		}
 	}
 	@Override

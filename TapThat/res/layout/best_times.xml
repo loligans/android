@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/current_time"
+        android:id="@+id/end_game_current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,10 +15,10 @@
         android:textSize="48sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore1"
+        android:id="@+id/end_game_highscore1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/current_time"
+        android:layout_below="@+id/end_game_current_time"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="@string/default_time"
@@ -26,66 +26,66 @@
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore2"
+        android:id="@+id/end_game_highscore2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tapout_highscore1"
+        android:layout_below="@+id/end_game_highscore1"
         android:layout_centerHorizontal="true"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore3"
+        android:id="@+id/end_game_highscore3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tapout_highscore2"
+        android:layout_below="@+id/end_game_highscore2"
         android:layout_centerHorizontal="true"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore4"
+        android:id="@+id/end_game_highscore4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tapout_highscore3"
+        android:layout_below="@+id/end_game_highscore3"
         android:layout_centerHorizontal="true"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore5"
+        android:id="@+id/end_game_highscore5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tapout_highscore4"
+        android:layout_below="@+id/end_game_highscore4"
         android:layout_centerHorizontal="true"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore6"
+        android:id="@+id/end_game_highscore6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tapout_highscore5"
+        android:layout_below="@+id/end_game_highscore5"
         android:layout_centerHorizontal="true"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="32sp" />
 
     <Button
-        android:id="@+id/retry_button"
+        android:id="@+id/end_game_retry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tapout_highscore6"
+        android:layout_below="@+id/end_game_highscore6"
         android:text="@string/retry_button" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/end_game_game_mode_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

@@ -1,8 +1,6 @@
 package com.ethan.Game.tapthat;
-
 import com.ethan.Game.tapthat.gameactivity.Game;
 import com.ethan.Game.tapthat.globals.Globals;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,38 +11,27 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainMenu extends Activity{
-	private GameReplay replay;
-	private OptionsMenu opts;
-	private Globals globalVar;
+	private GameReplay mReplay;
+	private Globals mGlobalVar;
+	private MenuLoader mViewLoader;
 	private View main_Menu;
-	private View main_Highscores;
-	private View main_Options;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		globalVar = (Globals)getApplicationContext();
+		mGlobalVar = (Globals)getApplicationContext();
+		mViewLoader = new MenuLoader(MainMenu.this);
 		initGame();
 		super.onCreate(savedInstanceState);
 	}
-	@Override
-	protected void onResume() {
-		if(currentView == 0){
-			new Thread(replay).start();
-		} 
-		super.onResume();
-	}
+	
 	protected void initGame(){
 		main_Menu = getLayoutInflater().inflate(R.layout.activity_startup_menu, null);
-		main_Highscores = getLayoutInflater().inflate(R.layout.highscores_layout, null);
-		main_Options = getLayoutInflater().inflate(R.layout.options_menu, null);
 		setContentView(main_Menu);
-		setupGameReplayView();
-		opts = new OptionsMenu(getApplicationContext());
+		mReplay = (GameReplay) findViewById(R.id.surfaceView1);
+		mReplay.initGameReplay(Long.parseLong(mGlobalVar.getUserHighScoreData().getString("0", "9000")));
 		setupButtons();
 	}
-	private void setupGameReplayView(){
-		replay = (GameReplay) findViewById(R.id.surfaceView1);
-		replay.initGameReplay(Long.parseLong(globalVar.getUserHighScoreData().getString("0", "9000")));
-	}
+	
+	
 	/**
 	 * Finds the users previous tile and background image
 	 * If there is none set, it uses the default
@@ -56,22 +43,22 @@ public class MainMenu extends Activity{
 		switch (switchCase) {
 		//case background
 		case 1:
-			int userBackground = Integer.parseInt(globalVar.getUserPrefData().getString("0", "1"));
+			int userBackground = Integer.parseInt(mGlobalVar.getUserPrefData().getString("0", "1"));
 			if(userBackground < 2){
 				//Default Background Selected
-				GameReplay.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
+				GameReplay.mBackgroundImage = mGlobalVar.getDefaultGameImages()[userBackground];
 			}else{
-				GameReplay.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
+				GameReplay.mBackgroundImage = mGlobalVar.getImportedBackgroundImages()[userBackground-2];
 			}
 			break;
 		//case tile
 		case 2:
-			int userTile = Integer.parseInt(globalVar.getUserPrefData().getString("1", "1"));
+			int userTile = Integer.parseInt(mGlobalVar.getUserPrefData().getString("1", "1"));
 			if(userTile < 2){
 				//Default Tile Selected
-				GameReplay.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
+				GameReplay.mTileImage = mGlobalVar.getDefaultGameImages()[2+userTile];
 			}else{
-				GameReplay.mTileImage = globalVar.getImportedTileImages()[userTile-2];
+				GameReplay.mTileImage = mGlobalVar.getImportedTileImages()[userTile-2];
 			}
 			break;
 		}
@@ -117,32 +104,38 @@ public class MainMenu extends Activity{
 	//The methods that will be called when a button is pressed
 	private void startTapOut(){
 		Log.v("MainMenu", "Tap Out Button");
-		replay.setThreadStatus(false);
+		mReplay.setThreadStatus(false);
 		Intent tapOut = new Intent(getApplicationContext(), Game.class);
 		tapOut.putExtra("game_mode", 1);
 		startActivityForResult(tapOut, 1);
 	}
 	private void startTimeCrunch(){
 		Log.v("MainMenu", "Time Crunch Button");
-		replay.setThreadStatus(false);
+		mReplay.setThreadStatus(false);
 		Intent tapOut = new Intent(getApplicationContext(), Game.class);
 		tapOut.putExtra("game_mode", 2);
 		startActivityForResult(tapOut, 2);
 	}
 	private void loadHighScores(){
 		Log.v("MainMenu", "High Scores Button");
-		replay.setThreadStatus(false);
-		setContentView(main_Highscores);
-		HighScoresMenu scores = new HighScoresMenu(MainMenu.this, globalVar);
-		scores.loadObjects();
+		mReplay.setThreadStatus(false);
+		mViewLoader.loadHighscoreMenu();
 		currentView = 1;
 	}
 	private void loadOptionsMenu(){
 		Log.v("MainMenu", "Options Menu Button");
-		replay.setThreadStatus(false);
+		mReplay.setThreadStatus(false);
+		mViewLoader.loadOptionsMenu();
 		currentView = 2;
-		setContentView(main_Options);
 	}
+	@Override
+	protected void onResume() {
+		if(currentView == 0){
+			new Thread(mReplay).start();
+		} 
+		super.onResume();
+	}
+	
 	/**
 	 * 0 = main menu
 	 * 1 = high scores menu
@@ -157,52 +150,54 @@ public class MainMenu extends Activity{
 			case 0:
 				super.onBackPressed();
 				break;
-			case 1:
+			default:
 				setContentView(main_Menu);
 				currentView = 0;
 				onResume();
 				break;
-			case 2:
-				setContentView(main_Menu);
-				currentView = 0;
-				onResume();
-				break;
-			case 3:
-				Log.i("In Game", "Preventing back press");
 		}
 	}
 	@Override
 	protected void onPause() {
-		replay.setThreadStatus(false);
+		mReplay.setThreadStatus(false);
 		super.onPause();
 	}
-	@Override
-	protected void onDestroy() {
-		
-		super.onDestroy();
-	}
-	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode){
 		case 1:
 			if(resultCode == Activity.RESULT_OK){
-				int score = data.getIntExtra("score", 0);
-				
+				//Show high scores
+				long score = data.getLongExtra("score", 0);
+				Log.i("Activity Result Tap That", "Time = " + score);
+				if(score != 0){
+					//Succeeded
+					updateHighScores(score);
+					mViewLoader.loadEndGameMenu(true, 1);
+					currentView = 3;
+				}else{
+					//failed
+					mViewLoader.loadEndGameMenu(false, 1);
+					currentView = 3;
+				}
 			}else{
 				//Game Stopped some how
 			}
 			break;
 		case 2:
 			if(resultCode == Activity.RESULT_OK){
-				int score = data.getIntExtra("score", 0);
-				
+				long score = data.getLongExtra("score", 0);
+				Log.i("Activity Result Time Crunch", "Time = " + score);
 			}else{
 				//Game Stopped some how
 			}
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	private void updateHighScores(long time){
+		
+		
 	}
 	
 }

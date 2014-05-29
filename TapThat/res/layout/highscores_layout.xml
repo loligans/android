@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tapout_highscore6"
+        android:layout_below="@+id/end_game_highscore6"
         android:layout_toLeftOf="@+id/space"
         android:text="@string/start_tap_out" />
 
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore1"
+        android:layout_alignRight="@+id/end_game_highscore1"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:text="Tap Out"
@@ -130,7 +130,7 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore1"
+        android:id="@+id/end_game_highscore1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/timecrunch_highscore1"
@@ -143,60 +143,60 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore2"
+        android:id="@+id/end_game_highscore2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore1"
-        android:layout_below="@+id/tapout_highscore1"
+        android:layout_alignRight="@+id/end_game_highscore1"
+        android:layout_below="@+id/end_game_highscore1"
         android:gravity="center"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore3"
+        android:id="@+id/end_game_highscore3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore2"
-        android:layout_below="@+id/tapout_highscore2"
+        android:layout_alignRight="@+id/end_game_highscore2"
+        android:layout_below="@+id/end_game_highscore2"
         android:gravity="center"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore4"
+        android:id="@+id/end_game_highscore4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore3"
-        android:layout_below="@+id/tapout_highscore3"
+        android:layout_alignRight="@+id/end_game_highscore3"
+        android:layout_below="@+id/end_game_highscore3"
         android:gravity="center"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore5"
+        android:id="@+id/end_game_highscore5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore4"
-        android:layout_below="@+id/tapout_highscore4"
+        android:layout_alignRight="@+id/end_game_highscore4"
+        android:layout_below="@+id/end_game_highscore4"
         android:gravity="center"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/tapout_highscore6"
+        android:id="@+id/end_game_highscore6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/tapout_highscore5"
-        android:layout_below="@+id/tapout_highscore5"
+        android:layout_alignRight="@+id/end_game_highscore5"
+        android:layout_below="@+id/end_game_highscore5"
         android:gravity="center"
         android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceMedium"

@@ -1,11 +1,11 @@
 package com.ethan.Game.tapthat.gameactivity;
-
 import java.util.Random;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -13,6 +13,8 @@ import android.view.SurfaceView;
 import android.view.GestureDetector.OnGestureListener;
 
 public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
+	public static Bitmap 		mTileBitmap = null;
+	public static Bitmap   		mBackgroundBitmap = null;
 	private boolean		   		mSurfaceCreated = false;
 	private boolean				mGameStarted = false;
 	private boolean 			mScaledImages = false;
@@ -27,14 +29,18 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 	private SurfaceHolder   	mSurfaceHolder;
 	private GestureDetector 	mGestureDetector;
 	private Context 		   	mApplicationContext;
-	private Bitmap 		   		mTileBitmap;
-	private Bitmap   			mBackgroundBitmap;
-	private static Random 		mRandom;
+	private static Random 		mRandom = new Random();
+	private Game 				mGameInstance;
 	
-	public TapOut(Context context){
+	public TapOut(Context context, Game game){
 		super(context);
+		mApplicationContext = context;
+		mGameInstance = game;
 		mSurfaceHolder = getHolder();
 		mSurfaceHolder.addCallback(this);
+		setFocusable(true);
+		setFocusableInTouchMode(true);
+		mGestureDetector = createGestureDetector(mGestureDetector);
 	}
 	
 
@@ -63,12 +69,11 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 	
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		if(!mScaledImages){
-			mTileBitmap = Bitmap.createScaledBitmap(mTileBitmap, w/4, h/4, false);
-			mBackgroundBitmap = Bitmap.createScaledBitmap(mBackgroundBitmap, w/4, h/4, false);
-			mScaledImages = true;
-		}
 		super.onSizeChanged(w, h, oldw, oldh);
+		mScaledX = w/4;
+		mScaledY = h/4;
+			mTileBitmap = Bitmap.createScaledBitmap(mTileBitmap, w/4, h/4, false);
+			mBackgroundBitmap = Bitmap.createScaledBitmap(mBackgroundBitmap, w, h, false);
 	}
 	
 	private void updateView(){
@@ -107,10 +112,15 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 		}
 		if(mMaximumSquares == -1){
 			mTime = System.currentTimeMillis()-mTime;
-			//loadBestTimesUI(true);
+			finishGame(mTime);
 		}
 	}
 	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		mGestureDetector.onTouchEvent(event);
+		return super.onTouchEvent(event);
+	}
 	
 	/**
 	 * Sets up the {@code GestureDetector} that will be used for registering tap events.
@@ -153,13 +163,13 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 			@Override
 			public boolean onDown(MotionEvent e) {
 				int rawX = (int) e.getRawX();
-				//Log.d("Touch Event", "Raw X = " + rawX);
+				Log.d("Touch Event", "Raw X = " + rawX);
 				if(rawX < mScaledX){
 					//Log.d("Touch Event", "Column 1");
 					if(mImageMatrix[0] == 1){
 						regenerateMatrix();
 					}else{
-						//loadBestTimesUI(false);
+						finishGame(0);
 					}
 					return true;
 				}else if(rawX < mScaledX * 2){
@@ -168,7 +178,7 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 						//Consumed
 						regenerateMatrix();
 					}else{
-						//loadBestTimesUI(false);
+						finishGame(0);
 					}
 					return true;
 				}else if(rawX < mScaledX* 3){
@@ -177,7 +187,7 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 						//Consumed
 						regenerateMatrix();
 					}else{
-						//loadBestTimesUI(false);
+						finishGame(0);
 					}
 					return true;
 				}else if(rawX > mScaledX * 3){
@@ -186,7 +196,7 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 						//Consumed
 						regenerateMatrix();
 					}else{
-						//loadBestTimesUI(false);
+						finishGame(0);
 					}
 					return true;
 				}
@@ -194,5 +204,9 @@ public class TapOut extends SurfaceView implements SurfaceHolder.Callback{
 			}
 		});
 		return GD;
+	}
+	
+	private void finishGame(long time){
+		mGameInstance.finishGameActivity(time);
 	}
 }

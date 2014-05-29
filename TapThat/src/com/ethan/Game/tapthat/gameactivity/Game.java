@@ -1,4 +1,6 @@
 package com.ethan.Game.tapthat.gameactivity;
+import com.ethan.Game.tapthat.globals.Globals;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +12,7 @@ public class Game extends Activity{
 	public static Bitmap		 mTileImage = null;
 	public static Bitmap 		 mBackgroundImage = null;
 	private int 				 mGameMode = 0;
+	private Globals 			 mGlobalVar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -18,7 +21,7 @@ public class Game extends Activity{
 		switch (mGameMode) {
 		case 1:
 			Log.d("Game", "Starting Tap Out");
-			setContentView(new TapOut(getApplicationContext()));
+			setContentView(new TapOut(getApplicationContext(), Game.this));
 			break;
 		}
 		super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class Game extends Activity{
 		
 		return;
 	}
-	private void finishGameActivity(int score){
+	public void finishGameActivity(long score){
 		Intent data = new Intent();
 		data.putExtra("score", score);
 		if (getParent() == null) {

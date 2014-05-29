@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import com.ethan.Game.tapthat.gameactivity.Game;
+import com.ethan.Game.tapthat.gameactivity.TapOut;
 import com.ethan.Game.tapthat.globals.Globals;
 
 import android.content.Context;
@@ -113,9 +114,11 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 				//Default Background Selected
 				GameReplay.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
 				Game.mBackgroundImage = globalVar.getDefaultGameImages()[userBackground];
+				TapOut.mBackgroundBitmap = globalVar.getDefaultGameImages()[userBackground];
 			}else{
 				GameReplay.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
 				Game.mBackgroundImage = globalVar.getImportedBackgroundImages()[userBackground-2];
+				TapOut.mBackgroundBitmap = globalVar.getImportedBackgroundImages()[userBackground-2];
 			}
 			break;
 		//case tile
@@ -125,9 +128,11 @@ public class LoadImagesAsyncHelper extends AsyncTask<Integer, Void, Bitmap[][]>{
 				//Default Tile Selected
 				GameReplay.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
 				Game.mTileImage = globalVar.getDefaultGameImages()[2+userTile];
+				TapOut.mTileBitmap = globalVar.getDefaultGameImages()[2+userTile];
 			}else{
 				GameReplay.mTileImage = globalVar.getImportedTileImages()[userTile-2];
 				Game.mTileImage = globalVar.getImportedTileImages()[userTile-2];
+				TapOut.mTileBitmap = globalVar.getImportedTileImages()[userTile-2];
 			}
 			break;
 		}
