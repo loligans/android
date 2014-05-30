@@ -25,10 +25,10 @@ public class MenuLoader {
 		mHighscoreView = mMain.getLayoutInflater().inflate(R.layout.highscores_layout, null);
 		mOptionsView = mMain.getLayoutInflater().inflate(R.layout.options_menu, null);
 	}
-	public void loadEndGameMenu(boolean completed, int gameType){
+	public void loadEndGameMenu(boolean completed, int gameType, long score){
 		Log.i("MenuLoader", "Loading End Game Menu");
 		mMain.setContentView(mGameView);
-		mGameMenu = new GameFinishedMenu(mMain, mGlobalVar, completed, gameType);
+		mGameMenu = new GameFinishedMenu(mMain, mGlobalVar, completed, gameType, score);
 		mGameMenu.loadObjects();
 	}
 	public void loadHighscoreMenu(){

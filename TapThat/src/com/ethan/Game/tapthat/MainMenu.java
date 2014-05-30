@@ -15,6 +15,7 @@ public class MainMenu extends Activity{
 	private Globals mGlobalVar;
 	private MenuLoader mViewLoader;
 	private View main_Menu;
+	private int currentView = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		mGlobalVar = (Globals)getApplicationContext();
@@ -142,7 +143,7 @@ public class MainMenu extends Activity{
 	 * 2 = options menu
 	 * 3 = in game
 	 */
-	private int currentView = 0;
+	
 	@Override
 	public void onBackPressed() {
 		Log.d("MainMenu", "Back Pressed");
@@ -173,11 +174,11 @@ public class MainMenu extends Activity{
 				if(score != 0){
 					//Succeeded
 					updateHighScores(score);
-					mViewLoader.loadEndGameMenu(true, 1);
+					mViewLoader.loadEndGameMenu(true, 1, score);
 					currentView = 3;
 				}else{
 					//failed
-					mViewLoader.loadEndGameMenu(false, 1);
+					mViewLoader.loadEndGameMenu(false, 1, score);
 					currentView = 3;
 				}
 			}else{

@@ -1,5 +1,7 @@
 package com.ethan.Game.tapthat.menus;
 
+import java.text.NumberFormat;
+
 import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,14 +15,19 @@ public class GameFinishedMenu {
 	private int		 mGameType;
 	private MainMenu mAppContext;
 	private Globals	 mGlobalVar;
+	private long	 mCurrentTime;
 	private TextView[] mTextViews = new TextView[6];
-	public GameFinishedMenu(MainMenu appContext, Globals globalVar,boolean completed, int gameType) {
+	public GameFinishedMenu(MainMenu appContext, Globals globalVar,boolean completed, int gameType, long score) {
 		mAppContext = appContext;
 		mGlobalVar = globalVar;
 		mGameCompleted = completed;
 		mGameType = gameType;
+		mCurrentTime = score;
 	}
 	public void loadObjects(){
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumFractionDigits(3);
+		String newScore = nf.format((double)mCurrentTime/1000);
 		mTextViews[0] = (TextView)mAppContext.findViewById(R.id.end_game_highscore1);
 		mTextViews[1] = (TextView)mAppContext.findViewById(R.id.end_game_highscore2);
 		mTextViews[2] = (TextView)mAppContext.findViewById(R.id.end_game_highscore3);
@@ -33,8 +40,10 @@ public class GameFinishedMenu {
 		switch(mGameType){
 		case 1:
 			gameModeName.setText("Tap Out");
-			if(!mGameCompleted){
-				
+			if(!mGameCompleted){//if game lost, display reg score no speeed
+				endGameScore.setText("you're outtie");
+			}else{//game is won
+				endGameScore.setText(newScore + "/s");
 			}
 			break;
 		case 2:
