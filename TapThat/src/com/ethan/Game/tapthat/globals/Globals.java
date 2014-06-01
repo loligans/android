@@ -73,5 +73,25 @@ public class Globals extends Application{
 			SharedPreferences mUserTileImageImportsData) {
 		this.mUserTileImageImportsData = mUserTileImageImportsData;
 	}
+	public long[] getHighScores(int gameType){
+		String[] highScores = new String[6];
+		long[]	 computedScores = new long[6];
+		switch(gameType){
+		case 1:
+			for(int i=0;i<6;i++){
+				highScores[i] = getUserHighScoreData().getString(""+i, "0");
+			}
+			break;
+		case 2:
+			for(int i=6;i<12;i++){
+				highScores[i-6] = getUserHighScoreData().getString(""+i, "0");
+			}
+			break;
+		}
+		for(int i=0;i<6;i++){
+			computedScores[i] = Long.parseLong(highScores[i]);
+		}
+		return computedScores;
+	}
 	
 }

@@ -1,8 +1,12 @@
 package com.ethan.Game.tapthat.menus;
 import java.text.NumberFormat;
+
 import com.ethan.Game.tapthat.MainMenu;
 import com.ethan.Game.tapthat.R;
+import com.ethan.Game.tapthat.gameactivity.Game;
 import com.ethan.Game.tapthat.globals.Globals;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +22,9 @@ public class HighScoresMenu {
 		mAppContext = appContext;
 		mGlobalVar = globalVar;
 	}
+	/**
+	 * 
+	 */
 	public void loadObjects(){
 		Button tapOut = (Button)mAppContext.findViewById(R.id.highscore_menu_launch_tapout);
 		Button timeCrunch = (Button)mAppContext.findViewById(R.id.highscore_menu_launch_timecrunch);
@@ -37,14 +44,18 @@ public class HighScoresMenu {
 			@Override
 			public void onClick(View v) {
 				Log.i("HighScores Menu", "Tap Out Pressed");
-				//TODO launch tapout
+				Intent tapOut = new Intent(mAppContext.getApplicationContext(), Game.class);
+				tapOut.putExtra("game_mode", 1);
+				mAppContext.startActivityForResult(tapOut, 1);
 			}
 		});
 		timeCrunch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Log.i("HighScores Menu", "Time Crunch Pressed");
-				//TODO Launch time crunch
+				Intent tapOut = new Intent(mAppContext.getApplicationContext(), Game.class);
+				tapOut.putExtra("game_mode", 2);
+				mAppContext.startActivityForResult(tapOut, 2);
 			}
 		});
 		loadHighScores();
